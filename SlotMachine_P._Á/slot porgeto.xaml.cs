@@ -25,33 +25,42 @@ namespace SlotMachine_P
 
         private void Spin()
         {
+            BalanceText.Text = "Egyenleg: " + balance;
             string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7" };
             Random rnd = new Random();
 
-            ReelsPanel.Children.Clear();
-
+            string[] results = new string[reelCount];
             bool nyert = false;
+            ReelsPanel.Children.Clear();
 
             for (int i = 0; i < reelCount; i++)
             {
+                results[i] = symbols[rnd.Next(symbols.Length)];
+            }
+
+            foreach(var asd in results)
+            {
                 TextBlock tb = new TextBlock
                 {
-                    Text = symbols[rnd.Next(symbols.Length)],
+                    Text = asd,
                     FontSize = 32,
                     Margin = new Thickness(5)
                 };
 
                 ReelsPanel.Children.Add(tb);
-
-                if (i > 0 &&
-                    tb.Text == ((TextBlock)ReelsPanel.Children[i - 1]).Text)
-                {
-                    balance += spinCost * 2;
-                    nyert = true;
-                }
             }
 
-            BalanceText.Text = "Egyenleg: " + balance;
+            if (reelCount==3 && results[0] == results[1] && results[0] == results[2] && results[0] == results[3] && results[0] == results[4])
+            {
+                balance += spinCost * 2;
+                nyert = true;
+            } else if (results[0] == results[1] && results[0] == results[2])
+            {
+                balance += spinCost * 2;
+                nyert = true;
+            }
+
+                BalanceText.Text = "Egyenleg: " + balance;
 
             if (nyert)
             {
@@ -65,7 +74,6 @@ namespace SlotMachine_P
             }
         }
 
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow(balance);
@@ -73,5 +81,16 @@ namespace SlotMachine_P
             this.Close();
         }
 
+        private void NewSpin_Click(object sender, RoutedEventArgs e)
+        {
+            if (balance < spinCost)
+            {
+                MessageBox.Show("Nincs elég egyenleg!");
+                return;
+            }
+
+            balance -= spinCost;
+            Spin();
+        }
     }
 }

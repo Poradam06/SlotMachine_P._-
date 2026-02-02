@@ -20,11 +20,15 @@
                    FontSize="20"
                    Margin="10"
                    TextAlignment="Center"/>
-
+        <Button x:Name="NewSpin" Content="Új pörgetés"
+                Click="NewSpin_Click"
+                HorizontalAlignment="Center" Width="100"
+                />
         <Button Content="Vissza a főmenübe"
                 Click="BackButton_Click"
                 Margin="0,20,0,0"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" Width="100"/>
+
 
     </StackPanel>
 </Window>
