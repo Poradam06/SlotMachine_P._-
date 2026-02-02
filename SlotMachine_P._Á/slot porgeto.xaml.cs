@@ -26,7 +26,7 @@ namespace SlotMachine_P
         private void Spin()
         {
             BalanceText.Text = "Egyenleg: " + balance;
-            string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7" };
+            string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7", "🔔", "🍀", "$", "🍎", "❤︎⁠", "🍇", "💎", "🍊", "Ω", "🍉" };
             Random rnd = new Random();
 
             string[] results = new string[reelCount];
