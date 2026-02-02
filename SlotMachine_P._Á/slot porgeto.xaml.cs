@@ -49,22 +49,17 @@ namespace SlotMachine_P
 
                 ReelsPanel.Children.Add(tb);
             }
+            var numUniques = 1;
+            nyert = results.Distinct().Count() == numUniques;
 
-            if (reelCount==3 && results[0] == results[1] && results[0] == results[2] && results[0] == results[3] && results[0] == results[4])
-            {
-                balance += spinCost * 2;
-                nyert = true;
-            } else if (results[0] == results[1] && results[0] == results[2])
-            {
-                balance += spinCost * 2;
-                nyert = true;
-            }
-
-                BalanceText.Text = "Egyenleg: " + balance;
+            BalanceText.Text = "Egyenleg: " + balance;
 
             if (nyert)
             {
+                if (results[0] == "7") balance += spinCost*10;
+                else balance += spinCost * 2;
                 ResultText.Text = "🎉 Nyertél!";
+                BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.LightGreen;
             }
             else

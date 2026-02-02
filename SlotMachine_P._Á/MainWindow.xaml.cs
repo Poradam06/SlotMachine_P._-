@@ -6,7 +6,7 @@ namespace SlotMachine_P
 {
     public partial class MainWindow : Window
     {
-        int balance = 1000;
+        int balance = 100000;
         public int spinCost = 50;
 
         public MainWindow()
