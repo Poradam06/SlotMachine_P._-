@@ -9,6 +9,7 @@ namespace SlotMachine_P
         int balance;
         int spinCost;
         int reelCount;
+        int failCount = 0;
 
         public SpinWindow(int currentBalance, int cost, int reels)
         {
@@ -56,14 +57,16 @@ namespace SlotMachine_P
 
             if (nyert)
             {
-                if (results[0] == "7") balance += spinCost*10;
-                else balance += spinCost * 2;
+                if (results[0] == "7") balance += spinCost*10*failCount;
+                else balance += spinCost * 2*failCount;
+                failCount = 0;
                 ResultText.Text = "🎉 Nyertél!";
                 BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.LightGreen;
             }
             else
             {
+                failCount++;
                 ResultText.Text = "😢 Nem nyertél!";
                 ResultText.Foreground = System.Windows.Media.Brushes.IndianRed;
             }
