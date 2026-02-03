@@ -15,19 +15,19 @@
                     HorizontalAlignment="Center"
                     Margin="0,20"/>
 
-        <!-- EZ HIÁNYZOTT IDE -->
         <TextBlock x:Name="ResultText"
                    FontSize="20"
                    Margin="10"
                    TextAlignment="Center"/>
         <Button x:Name="NewSpin" Content="Új pörgetés"
                 Click="NewSpin_Click"
-                HorizontalAlignment="Center" Width="100"
+                HorizontalAlignment="Center" Width="111"
                 />
+        <CheckBox x:Name="ContinueCheck" Content="Folytatás" Width="77" IsChecked="True" Background="White" Checked="ContCheck" IsEnabled="false"/>
         <Button Content="Vissza a főmenübe"
                 Click="BackButton_Click"
                 Margin="0,20,0,0"
-                HorizontalAlignment="Center" Width="100"/>
+                HorizontalAlignment="Center" Width="111"/>
 
 
     </StackPanel>

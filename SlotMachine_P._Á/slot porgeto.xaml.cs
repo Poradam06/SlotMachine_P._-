@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace SlotMachine_P
 {
@@ -23,12 +27,12 @@ namespace SlotMachine_P
 
             Spin();
         }
-
-        private void Spin()
+        
+        private async Task Spin()
         {
             BalanceText.Text = "Egyenleg: " + balance;
-            string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7", "🔔", "🍀", "$", "🍎", "❤︎⁠", "🍇", "💎", "🍊", "Ω", "🍉" };
             Random rnd = new Random();
+            string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7", "🔔", "🍀", "$", "🍎", "❤︎⁠", "🍇", "💎", "🍊", "Ω", "🍉" };
 
             string[] results = new string[reelCount];
             bool nyert = false;
@@ -38,8 +42,7 @@ namespace SlotMachine_P
             {
                 results[i] = symbols[rnd.Next(symbols.Length)];
             }
-
-            foreach(var asd in results)
+            foreach (var asd in results)
             {
                 TextBlock tb = new TextBlock
                 {
@@ -47,8 +50,8 @@ namespace SlotMachine_P
                     FontSize = 32,
                     Margin = new Thickness(5)
                 };
-
                 ReelsPanel.Children.Add(tb);
+                
             }
             var numUniques = 1;
             nyert = results.Distinct().Count() == numUniques;
@@ -57,6 +60,9 @@ namespace SlotMachine_P
 
             if (nyert)
             {
+                NewSpin.IsEnabled = false;
+                ContinueCheck.IsEnabled = true;
+                ContinueCheck.IsChecked = false;
                 if (results[0] == "7") balance += spinCost*10*failCount;
                 else balance += spinCost * 2*failCount;
                 failCount = 0;
@@ -81,6 +87,7 @@ namespace SlotMachine_P
 
         private void NewSpin_Click(object sender, RoutedEventArgs e)
         {
+            ContinueCheck.IsEnabled = false;
             if (balance < spinCost)
             {
                 MessageBox.Show("Nincs elég egyenleg!");
@@ -89,6 +96,11 @@ namespace SlotMachine_P
 
             balance -= spinCost;
             Spin();
+        }
+
+        private void ContCheck(object sender, RoutedEventArgs e)
+        {
+            NewSpin.IsEnabled = true;
         }
     }
 }

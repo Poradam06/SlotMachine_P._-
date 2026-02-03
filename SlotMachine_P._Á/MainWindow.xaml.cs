@@ -11,14 +11,24 @@ namespace SlotMachine_P
 
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            balance = 100000;
             BalanceText.Text = "Egyenleg: " + balance;
             CostText.Text = "Pörgetés ára: " + spinCost;
+        }
+
+        public MainWindow(int newBalance) : this()
+        {
+            balance = newBalance;
+            BalanceText.Text = "Egyenleg: " + balance;
         }
 
         //Porgetes ara
         private void Radio_Checked(object sender, RoutedEventArgs e)
         {
+            if (CostText == null)
+                return;
+
             if (Radio3.IsChecked == true)
             {
                 spinCost = 50;
@@ -34,13 +44,6 @@ namespace SlotMachine_P
 
 
 
-        }
-        public MainWindow(int newBalance = 1000)
-        {
-            InitializeComponent();
-            balance = newBalance;
-            BalanceText.Text = "Egyenleg: " + balance;
-            CostText.Text = "Pörgetés ára: " + spinCost;
         }
 
 
