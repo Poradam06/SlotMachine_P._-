@@ -87,6 +87,10 @@ namespace SlotMachine_P
                 balance += spinCost*2*(1+failCount/10); // kisebb nyeremény
                 ResultText.Text = "🙂 3 egyforma! Kis nyeremény!";
                 ResultText.Foreground = System.Windows.Media.Brushes.Yellow;
+                NewSpin.IsEnabled = false;
+                ContinueCheck.IsEnabled = true;
+                ContinueCheck.IsChecked = false;
+                failCount = 0;
             }
             else
             {
