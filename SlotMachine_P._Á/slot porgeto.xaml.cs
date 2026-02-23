@@ -28,11 +28,11 @@ namespace SlotMachine_P
             Spin();
         }
         
-        private async Task Spin()
+        private void Spin()
         {
             BalanceText.Text = "Egyenleg: " + balance;
             Random rnd = new Random();
-            string[] symbols = { "🍒", "🍋", "🍉", "⭐", "7", "🔔", "🍀", "$", "🍎", "❤︎⁠", "🍇", "💎", "🍊", "Ω", "🍉" };
+            string[] symbols = { "🍒", "🍋", "🔔", "💎", "7️⃣" };
 
             string[] results = new string[reelCount];
             bool nyert = false;

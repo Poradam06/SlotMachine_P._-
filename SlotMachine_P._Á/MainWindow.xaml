@@ -1,7 +1,8 @@
 ﻿<Window x:Class="SlotMachine_P.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SlotMachine" Height="350" Width="500">
+        Title="SlotMachine" Height="350" Width="500"
+        Background="#1E1E1E">
 
     <StackPanel Margin="10">
 
