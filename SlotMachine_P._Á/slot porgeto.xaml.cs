@@ -58,6 +58,7 @@ namespace SlotMachine_P
             var numUniques = 1;
             bool fullMatch = results.Distinct().Count() == 1;
             bool haromEgymasMellett = false;
+            bool negyEgymasMellett = false;
             if (reelCount >= 3)
             {
                 for (int i = 0; i <= results.Length - 3; i++)
@@ -65,6 +66,14 @@ namespace SlotMachine_P
                     if (results[i] == results[i + 1] && results[i] == results[i + 2])
                     {
                         haromEgymasMellett = true;
+                        break;
+                    }
+                }
+                for (int i = 0; i <= results.Length - 4; i++)
+                {
+                    if (results[i] == results[i + 1] && results[i] == results[i + 2] && results[i] == results[i+3])
+                    {
+                        negyEgymasMellett = true;
                         break;
                     }
                 }
@@ -76,16 +85,28 @@ namespace SlotMachine_P
                 ContinueCheck.IsEnabled = true;
                 ContinueCheck.IsChecked = false;
                 if (results[0] == "7️⃣") balance += spinCost*10*failCount;
-                else balance += spinCost * 2*failCount;
+                else balance += spinCost * 4*failCount;
                 failCount = 0;
                 ResultText.Text = "🎉 Nyertél!";
                 BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.LightGreen;
             }
+            else if (negyEgymasMellett)
+            {
+                balance += spinCost * 3 * (1 + failCount / 10); // kisebb nyeremény
+                ResultText.Text = "🙂 4 egyforma! Közepes nyeremény!";
+                BalanceText.Text = "Egyenleg: " + balance;
+                ResultText.Foreground = System.Windows.Media.Brushes.Yellow;
+                NewSpin.IsEnabled = false;
+                ContinueCheck.IsEnabled = true;
+                ContinueCheck.IsChecked = false;
+                failCount = 0;
+            }
             else if (haromEgymasMellett)
             {
                 balance += spinCost*2*(1+failCount/10); // kisebb nyeremény
                 ResultText.Text = "🙂 3 egyforma! Kis nyeremény!";
+                BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.Yellow;
                 NewSpin.IsEnabled = false;
                 ContinueCheck.IsEnabled = true;
