@@ -93,7 +93,7 @@ namespace SlotMachine_P
             }
             else if (negyEgymasMellett)
             {
-                balance += spinCost * 3 * (1 + failCount / 10); // kisebb nyeremény
+                balance += spinCost * 3 * failCount/2; // kisebb nyeremény
                 ResultText.Text = "🙂 4 egyforma! Közepes nyeremény!";
                 BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.Yellow;
@@ -104,7 +104,7 @@ namespace SlotMachine_P
             }
             else if (haromEgymasMellett)
             {
-                balance += spinCost*2*(1+failCount/10); // kisebb nyeremény
+                balance += spinCost*2*failCount/2; // kisebb nyeremény
                 ResultText.Text = "🙂 3 egyforma! Kis nyeremény!";
                 BalanceText.Text = "Egyenleg: " + balance;
                 ResultText.Foreground = System.Windows.Media.Brushes.Yellow;
